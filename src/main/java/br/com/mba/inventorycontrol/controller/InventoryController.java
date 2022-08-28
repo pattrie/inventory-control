@@ -47,7 +47,7 @@ public class InventoryController {
   })
   @GetMapping("/{id}")
   @ResponseStatus(HttpStatus.OK)
-  public ResponseEntity<ProductResponseDto> getById(@PathVariable Long id) {
+  public ResponseEntity<ProductResponseDto> getById(@PathVariable Integer id) {
     log.info("Searching product by ID:: {}", id);
     return productService.findById(id);
   }

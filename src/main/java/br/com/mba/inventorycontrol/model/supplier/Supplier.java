@@ -25,8 +25,17 @@ public class Supplier {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private Long id;
+  private Integer id;
 
   @Column(nullable = false)
   private String name;
+
+  //private Address address;
+
+  private Long cnpj;
+
+  private int phone;
+
+  private int email;
+
 }

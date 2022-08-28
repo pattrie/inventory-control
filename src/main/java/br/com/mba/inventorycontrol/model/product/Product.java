@@ -1,5 +1,7 @@
 package br.com.mba.inventorycontrol.model.product;
 
+import br.com.mba.inventorycontrol.model.category.Category;
+import br.com.mba.inventorycontrol.model.storageplace.StoragePlace;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
@@ -7,6 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,10 +30,11 @@ import org.hibernate.annotations.UpdateTimestamp;
 @AllArgsConstructor
 @Table(name = "tb_product")
 public class Product {
-
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private Long id;
+  private Integer id;
+
+  private String sku;
 
   @Column(nullable = false)
   private String name;
@@ -46,14 +51,18 @@ public class Product {
   @Column(name = "unitary_value")
   private BigDecimal unitaryValue;
 
-  @Column(name = "id_category")
+  @JoinColumn(name = "id_category", referencedColumnName = "id")
+  @ManyToOne(targetEntity = Category.class)
   private Integer idCategory;
 
   @Column(name = "id_supplier")
   private Integer idSupplier;
 
-  @Column(name = "id_storage_place")
+  @JoinColumn(name = "id_storage_place", referencedColumnName = "id")
+  @ManyToOne(targetEntity = StoragePlace.class)
   private Integer idStoragePlace;
+
+  private boolean active = true;
 
   @CreationTimestamp
   @Column(name = "created_at", nullable = false, updatable = false)

@@ -15,7 +15,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ProductResponseDto {
 
-  private Long id;
+  private Integer id;
 
   private String name;
 

@@ -1,4 +1,4 @@
-package br.com.mba.inventorycontrol.model.address;
+package br.com.mba.inventorycontrol.model.user;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,34 +20,19 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "tb_address")
-public class Address {
+@Table(name = "tb_user")
+public class User {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
 
-  @Column(nullable = false)
-  private String zipcode;
+  private String name;
 
   @Column(nullable = false)
-  private String street;
+  private String login;
 
   @Column(nullable = false)
-  private String streetNumber;
-
-  private String complementary;
-
-  @Column(nullable = false)
-  private String city;
-
-  @Column(nullable = false)
-  private String neighborhood;
-
-  @Column(nullable = false)
-  private String state;
-
-  @Column(nullable = false)
-  private String country;
+  private String password;
 
 }

@@ -1,5 +1,6 @@
-package br.com.mba.inventorycontrol.model.address;
+package br.com.mba.inventorycontrol.model.productout;
 
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +13,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Builder
 @Getter
@@ -20,34 +22,19 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "tb_address")
-public class Address {
+@Table(name = "tb_product_out")
+public class ProductOut {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
 
-  @Column(nullable = false)
-  private String zipcode;
+  @Column(name = "id_product")
+  private Integer idProduct;
 
-  @Column(nullable = false)
-  private String street;
+  private Integer quantity;
 
-  @Column(nullable = false)
-  private String streetNumber;
-
-  private String complementary;
-
-  @Column(nullable = false)
-  private String city;
-
-  @Column(nullable = false)
-  private String neighborhood;
-
-  @Column(nullable = false)
-  private String state;
-
-  @Column(nullable = false)
-  private String country;
-
+  @CreationTimestamp
+  @Column(name = "date_out", nullable = false)
+  private LocalDateTime dateOut =  LocalDateTime.now();
 }
