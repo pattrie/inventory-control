@@ -1,7 +1,10 @@
 package br.com.mba.inventorycontrol.model.product;
 
+import br.com.mba.inventorycontrol.model.category.Category;
+import br.com.mba.inventorycontrol.model.storageplace.StoragePlace;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,11 +30,11 @@ public class ProductResponseDto {
 
   private BigDecimal unitaryValue;
 
-  private Integer idCategory;
+  private Category idCategory;
 
   private Integer idSupplier;
 
-  private Integer idStoragePlace;
+  private Collection<StoragePlace> storagePlace;
 
   private LocalDateTime createdAt;
 
@@ -45,7 +48,7 @@ public class ProductResponseDto {
         .unitaryValue(product.getUnitaryValue())
         .idCategory(product.getIdCategory())
         .idSupplier(product.getIdSupplier())
-        .idStoragePlace(product.getIdStoragePlace())
+        .storagePlace(product.getStoragePlace())
         .createdAt(product.getCreatedAt())
         .build();
   }

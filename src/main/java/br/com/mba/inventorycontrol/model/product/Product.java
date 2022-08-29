@@ -4,6 +4,7 @@ import br.com.mba.inventorycontrol.model.category.Category;
 import br.com.mba.inventorycontrol.model.storageplace.StoragePlace;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -53,14 +54,14 @@ public class Product {
 
   @JoinColumn(name = "id_category", referencedColumnName = "id")
   @ManyToOne(targetEntity = Category.class)
-  private Integer idCategory;
+  private Category idCategory;
 
   @Column(name = "id_supplier")
   private Integer idSupplier;
 
   @JoinColumn(name = "id_storage_place", referencedColumnName = "id")
   @ManyToOne(targetEntity = StoragePlace.class)
-  private Integer idStoragePlace;
+  private Collection<StoragePlace> storagePlace;
 
   private boolean active = true;
 

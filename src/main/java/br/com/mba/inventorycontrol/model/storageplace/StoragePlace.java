@@ -13,6 +13,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Builder
@@ -30,6 +31,13 @@ public class StoragePlace {
   private Integer id;
 
   //private Address address;
+
+  @Column(nullable = false)
+  private int quantity;
+
+  @CreationTimestamp
+  @Column(name = "created_at", nullable = false, updatable = false)
+  private LocalDateTime createdAt;
 
   @UpdateTimestamp
   @Column(name = "updated_at")

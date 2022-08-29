@@ -1,8 +1,11 @@
 package br.com.mba.inventorycontrol.model.product;
 
+import br.com.mba.inventorycontrol.model.category.Category;
+import br.com.mba.inventorycontrol.model.storageplace.StoragePlace;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Collection;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -35,13 +38,13 @@ public class ProductRequestDto {
   private BigDecimal unitaryValue;
 
   @NotNull(message = "Id category cannot be null")
-  private Integer idCategory;
+  private Category idCategory;
 
   @NotNull(message = "Id supplier cannot be null")
   private Integer idSupplier;
 
-  @NotNull(message = "Id storage place cannot be null")
-  private Integer idStoragePlace;
+  @NotNull(message = "Storage place cannot be null")
+  private Collection<StoragePlace> storagePlace;
 
   public Product convertJsonToEntity() {
     return Product.builder()
@@ -52,7 +55,7 @@ public class ProductRequestDto {
         .quantity(this.quantity)
         .unitaryValue(this.unitaryValue)
         .idSupplier(this.idSupplier)
-        .idStoragePlace(this.idStoragePlace)
+        .storagePlace(this.storagePlace)
         .createdAt(LocalDateTime.now())
         .build();
   }
