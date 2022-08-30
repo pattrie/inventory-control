@@ -46,14 +46,11 @@ public class ProductService {
     product.setStoragePlaces(storagePlacesSave);
 
     final Product productSave = productRepository.save(product);
-
     final ProductIn productIn = ProductIn.builder()
         .idProduct(productSave.getId())
         .quantity(product.getQuantity())
         .build();
-
     productInRepository.save(productIn);
-
     return productSave;
   }
 
