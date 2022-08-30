@@ -2,9 +2,11 @@ package br.com.mba.inventorycontrol.model.product;
 
 import br.com.mba.inventorycontrol.model.category.Category;
 import br.com.mba.inventorycontrol.model.storageplace.StoragePlace;
+import br.com.mba.inventorycontrol.model.supplier.Supplier;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,15 +28,15 @@ public class ProductResponseDto {
 
   private String image;
 
-  private Integer quantity;
+  private Long quantity;
 
   private BigDecimal unitaryValue;
 
   private Category idCategory;
 
-  private Integer idSupplier;
+  private Supplier idSupplier;
 
-  private Collection<StoragePlace> storagePlace;
+  private List<StoragePlace> storagePlaces;
 
   private LocalDateTime createdAt;
 
@@ -46,9 +48,9 @@ public class ProductResponseDto {
         .image(product.getImage())
         .quantity(product.getQuantity())
         .unitaryValue(product.getUnitaryValue())
-        .idCategory(product.getIdCategory())
-        .idSupplier(product.getIdSupplier())
-        .storagePlace(product.getStoragePlace())
+        .idCategory(product.getCategory())
+        .idSupplier(product.getSupplier())
+        .storagePlaces(product.getStoragePlaces())
         .createdAt(product.getCreatedAt())
         .build();
   }

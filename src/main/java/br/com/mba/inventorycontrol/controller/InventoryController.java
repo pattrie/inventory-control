@@ -7,6 +7,7 @@ import br.com.mba.inventorycontrol.service.ProductService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import javax.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -34,10 +35,9 @@ public class InventoryController {
   })
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public Product create(@RequestBody final ProductRequestDto productDto) {
-    final Product product = productDto.convertJsonToEntity();
-    log.info("Creating a new product:: {}", product);
-    return productService.create(product);
+  public Product create(@RequestBody @Valid final ProductRequestDto productDto) {
+    log.info("Creating a new product:: {}", productDto);
+    return productService.create(productDto);
   }
 
   @ApiOperation(value = "Searching product")

@@ -32,9 +32,9 @@ public class ProductIn {
   @Column(name = "id_product")
   private Integer idProduct;
 
-  private Integer quantity;
+  private Long quantity;
 
   @CreationTimestamp
   @Column(name = "date_in", nullable = false)
-  private LocalDateTime dateIn =  LocalDateTime.now();
+  private LocalDateTime dateIn;
 }

@@ -25,7 +25,7 @@ public class Address {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private Integer id;
+  private Long id;
 
   @Column(nullable = false)
   private String zipcode;
@@ -34,7 +34,7 @@ public class Address {
   private String street;
 
   @Column(nullable = false)
-  private String streetNumber;
+  private String number;
 
   private String complementary;
 
