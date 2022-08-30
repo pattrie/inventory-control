@@ -1,11 +1,14 @@
 package br.com.mba.inventorycontrol.model.storageplace;
 
+import br.com.mba.inventorycontrol.model.address.Address;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,12 +31,14 @@ public class StoragePlace {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  private Integer id;
+  private Long id;
 
-  //private Address address;
+  @JoinColumn(name = "id_address", referencedColumnName = "id")
+  @ManyToOne(targetEntity = Address.class)
+  private Address address;
 
   @Column(nullable = false)
-  private int quantity;
+  private Long quantity;
 
   @CreationTimestamp
   @Column(name = "created_at", nullable = false, updatable = false)
@@ -41,5 +46,5 @@ public class StoragePlace {
 
   @UpdateTimestamp
   @Column(name = "updated_at")
-  private LocalDateTime updatedAt;
+  private LocalDateTime updatedAt = LocalDateTime.now();
 }

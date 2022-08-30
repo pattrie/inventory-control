@@ -1,10 +1,13 @@
 package br.com.mba.inventorycontrol.model.supplier;
 
+import br.com.mba.inventorycontrol.model.address.Address;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,12 +33,13 @@ public class Supplier {
   @Column(nullable = false)
   private String name;
 
-  //private Address address;
+  @JoinColumn(name = "id_address", referencedColumnName = "id")
+  @ManyToOne(targetEntity = Address.class)
+  private Address address;
 
-  private Long cnpj;
+  private String cnpj;
 
-  private int phone;
+  private String phone;
 
-  private int email;
-
+  private String email;
 }

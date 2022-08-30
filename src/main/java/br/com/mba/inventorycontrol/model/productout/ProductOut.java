@@ -36,5 +36,5 @@ public class ProductOut {
 
   @CreationTimestamp
   @Column(name = "date_out", nullable = false)
-  private LocalDateTime dateOut =  LocalDateTime.now();
+  private LocalDateTime dateOut;
 }

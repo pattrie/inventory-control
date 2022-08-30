@@ -1,18 +1,18 @@
 package br.com.mba.inventorycontrol.model.product;
 
-import br.com.mba.inventorycontrol.model.category.Category;
-import br.com.mba.inventorycontrol.model.storageplace.StoragePlace;
+import br.com.mba.inventorycontrol.model.category.CategoryRequestDto;
+import br.com.mba.inventorycontrol.model.storageplace.StoragePlaceRequestDto;
+import br.com.mba.inventorycontrol.model.supplier.SupplierRequestDto;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.Collection;
+import java.util.List;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 
 @Getter
 @Setter
@@ -31,20 +31,16 @@ public class ProductRequestDto {
 
   private String color;
 
-  @NotNull(message = "Quantity of the product cannot be null")
-  private Integer quantity;
-
+  @Positive
   @NotNull(message = "Unitary value cannot be null")
   private BigDecimal unitaryValue;
 
-  @NotNull(message = "Id category cannot be null")
-  private Category idCategory;
+  private CategoryRequestDto category;
 
-  @NotNull(message = "Id supplier cannot be null")
-  private Integer idSupplier;
+  private SupplierRequestDto supplier;
 
   @NotNull(message = "Storage place cannot be null")
-  private Collection<StoragePlace> storagePlace;
+  private List<StoragePlaceRequestDto> storagePlaces;
 
   public Product convertJsonToEntity() {
     return Product.builder()
@@ -52,11 +48,8 @@ public class ProductRequestDto {
         .description(this.description)
         .image(this.image)
         .color(this.color)
-        .quantity(this.quantity)
+        .quantity(storagePlaces.stream().mapToLong(StoragePlaceRequestDto::getQuantity).sum())
         .unitaryValue(this.unitaryValue)
-        .idSupplier(this.idSupplier)
-        .storagePlace(this.storagePlace)
-        .createdAt(LocalDateTime.now())
         .build();
   }
 }

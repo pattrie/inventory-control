@@ -2,15 +2,18 @@ package br.com.mba.inventorycontrol.model.product;
 
 import br.com.mba.inventorycontrol.model.category.Category;
 import br.com.mba.inventorycontrol.model.storageplace.StoragePlace;
+import br.com.mba.inventorycontrol.model.supplier.Supplier;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Collection;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -31,6 +34,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 @AllArgsConstructor
 @Table(name = "tb_product")
 public class Product {
+
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer id;
@@ -47,21 +51,27 @@ public class Product {
   private String color;
 
   @Column(nullable = false)
-  private int quantity;
+  private Long quantity;
 
   @Column(name = "unitary_value")
   private BigDecimal unitaryValue;
 
   @JoinColumn(name = "id_category", referencedColumnName = "id")
   @ManyToOne(targetEntity = Category.class)
-  private Category idCategory;
+  private Category category;
 
-  @Column(name = "id_supplier")
-  private Integer idSupplier;
+  @JoinColumn(name = "id_supplier", referencedColumnName = "id")
+  @ManyToOne(targetEntity = Supplier.class)
+  private Supplier supplier;
 
-  @JoinColumn(name = "id_storage_place", referencedColumnName = "id")
-  @ManyToOne(targetEntity = StoragePlace.class)
-  private Collection<StoragePlace> storagePlace;
+  @ManyToMany(targetEntity = StoragePlace.class)
+  @JoinTable(name = "product_storage_place",
+      joinColumns = {
+          @JoinColumn(table = "tb_product", name = "id_product", referencedColumnName = "id")},
+      inverseJoinColumns = {
+          @JoinColumn(table = "tb_storage_place", name = "id_storage_place",
+              referencedColumnName = "id")})
+  private List<StoragePlace> storagePlaces;
 
   private boolean active = true;
 
@@ -71,5 +81,5 @@ public class Product {
 
   @UpdateTimestamp
   @Column(name = "updated_at")
-  private LocalDateTime updatedAt;
+  private LocalDateTime updatedAt = LocalDateTime.now();
 }
