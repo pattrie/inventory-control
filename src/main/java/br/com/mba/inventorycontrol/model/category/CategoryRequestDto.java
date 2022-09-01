@@ -16,7 +16,7 @@ import lombok.Setter;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CategoryRequestDto {
 
-  private Long id;
+  private Integer id;
 
   @NotNull(message = "Name of the category cannot be null")
   private String name;

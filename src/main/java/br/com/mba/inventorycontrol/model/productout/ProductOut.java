@@ -26,7 +26,7 @@ import org.hibernate.annotations.CreationTimestamp;
 public class ProductOut {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
   @Column(name = "id_product")

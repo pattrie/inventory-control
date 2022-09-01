@@ -18,7 +18,7 @@ import lombok.Setter;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class StoragePlaceRequestDto {
 
-  private Long id;
+  private Integer id;
 
   @Positive
   @NotNull(message = "Quantity cannot be null")

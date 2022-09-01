@@ -36,7 +36,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 public class Product {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer id;
 
   private String sku;
@@ -65,7 +65,7 @@ public class Product {
   private Supplier supplier;
 
   @ManyToMany(targetEntity = StoragePlace.class)
-  @JoinTable(name = "product_storage_place",
+  @JoinTable(name = "tb_inventory",
       joinColumns = {
           @JoinColumn(table = "tb_product", name = "id_product", referencedColumnName = "id")},
       inverseJoinColumns = {
@@ -73,6 +73,7 @@ public class Product {
               referencedColumnName = "id")})
   private List<StoragePlace> storagePlaces;
 
+  @Builder.Default
   private boolean active = true;
 
   @CreationTimestamp
@@ -81,5 +82,5 @@ public class Product {
 
   @UpdateTimestamp
   @Column(name = "updated_at")
-  private LocalDateTime updatedAt = LocalDateTime.now();
+  private LocalDateTime updatedAt;
 }

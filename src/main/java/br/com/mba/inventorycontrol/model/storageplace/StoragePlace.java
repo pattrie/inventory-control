@@ -30,8 +30,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 public class StoragePlace {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private Long id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Integer id;
 
   @JoinColumn(name = "id_address", referencedColumnName = "id")
   @ManyToOne(targetEntity = Address.class)
@@ -46,5 +46,5 @@ public class StoragePlace {
 
   @UpdateTimestamp
   @Column(name = "updated_at")
-  private LocalDateTime updatedAt = LocalDateTime.now();
+  private LocalDateTime updatedAt;
 }

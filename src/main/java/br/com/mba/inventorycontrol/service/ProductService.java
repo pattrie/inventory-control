@@ -56,27 +56,32 @@ public class ProductService {
 
   private List<StoragePlace> getStoragePlaces(final ProductRequestDto productDto) {
     final List<StoragePlaceRequestDto> storagePlaces = productDto.getStoragePlaces();
+
     final List<StoragePlace> storagePlaceList = storagePlaces.stream()
         .map(StoragePlaceRequestDto::convertJsonToEntity)
         .collect(Collectors.toList());
 
     List<StoragePlace> storagePlacesSave = new ArrayList<>();
+
     storagePlaceList.forEach(storagePlace -> {
       Address addressSave = addressRepository.save(storagePlace.getAddress());
       storagePlace.setAddress(addressSave);
       storagePlacesSave.add(storagePlaceRepository.save(storagePlace));
     });
+
     return storagePlacesSave;
   }
 
   private Supplier getSupplier(final ProductRequestDto productDto) {
     final Supplier supplier = productDto.getSupplier().convertJsonToEntity();
-    return supplierRepository.save(supplier);
+    return supplier.getId() == null ? supplierRepository.save(supplier)
+        : supplierRepository.findById(supplier.getId()).get();
   }
 
   private Category getCategory(final ProductRequestDto productDto) {
     final Category category = productDto.getCategory().convertJsonToEntity();
-    return categoryRepository.save(category);
+    return category.getId() == null ? categoryRepository.save(category)
+        : categoryRepository.findById(category.getId()).get();
   }
 
   public ResponseEntity<ProductResponseDto> findById(final Integer id) {

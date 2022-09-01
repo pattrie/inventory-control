@@ -13,7 +13,7 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class AddressRequestDto {
 
-  private Long id;
+  private Integer id;
 
   private String zipcode;
 
