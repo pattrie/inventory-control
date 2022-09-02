@@ -9,6 +9,7 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,6 +17,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
@@ -24,6 +26,8 @@ public class ProductRequestDto {
 
   @NotNull(message = "Name of the product cannot be null")
   private String name;
+
+  private String sku;
 
   private String description;
 
@@ -45,6 +49,7 @@ public class ProductRequestDto {
   public Product convertJsonToEntity() {
     return Product.builder()
         .name(this.name)
+        .sku(this.sku)
         .description(this.description)
         .image(this.image)
         .color(this.color)

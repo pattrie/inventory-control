@@ -1,6 +1,7 @@
 package br.com.mba.inventorycontrol.model.address;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
@@ -15,7 +17,7 @@ public class AddressRequestDto {
 
   private Integer id;
 
-  private String zipcode;
+  private String zipCode;
 
   private String street;
 
@@ -34,7 +36,7 @@ public class AddressRequestDto {
   public Address convertJsonToEntity() {
     return Address.builder()
         .id(this.id)
-        .zipcode(this.zipcode)
+        .zipCode(this.zipCode)
         .street(this.street)
         .number(this.number)
         .complementary(this.complementary)
