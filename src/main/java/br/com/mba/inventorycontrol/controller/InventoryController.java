@@ -31,7 +31,7 @@ public class InventoryController {
   @ApiOperation(value = "Creating a new product")
   @ApiResponses(value = {
       @ApiResponse(code = 201, message = "Successfully created product"),
-      @ApiResponse(code = 500, message = "There was an error creating the product, check the information")
+      @ApiResponse(code = 400, message = "There was an error creating the product, check the information")
   })
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
