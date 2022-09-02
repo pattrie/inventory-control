@@ -13,7 +13,8 @@
     <h3> Feature :computer: </h3>
 </div>
 
-- [x] Projeto inicial planejado para uma ONG, afim de auxiliar na gestão da entrada e saída de produtos de qualquer lugar do país.
+- [x] Projeto inicialmente planejado para uma ONG, afim de auxiliar na gestão da 
+entrada e saída de produtos de qualquer lugar do país.
 
 <div id="tech">
   <h3> Tecnologias e Dependências 🛠  </h3>
