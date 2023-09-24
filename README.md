@@ -7,6 +7,7 @@
 - <a href="#feature">Feature</a>
 - <a href="#tech">Tecnologias e Dependências</a>
 - <a href="#swagger">Execução no Swagger</a>
+- <a href="#dependencia">Dependências</a>
 <!--te-->
 
 <div id="feature">
@@ -102,3 +103,8 @@ Input: PUT:"/api/v1/inventory/{id}"
 
 #### :white_check_mark: Deleta um Produto
 Input: DELETE:"/api/v1/inventory/{id}"
+
+<div id="dependencia">
+    <h3> Dependências ❗️❗️❗️ </h3>
+</div>
+https://github.com/pattrie/inventory-control-user
