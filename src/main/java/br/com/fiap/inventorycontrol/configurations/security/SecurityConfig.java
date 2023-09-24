@@ -3,6 +3,7 @@ package br.com.fiap.inventorycontrol.configurations.security;
 import br.com.fiap.inventorycontrol.usecases.AuthenticationService;
 import br.com.fiap.inventorycontrol.usecases.TokenService;
 import br.com.fiap.inventorycontrol.usecases.UserService;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,6 +16,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
 
 @EnableWebSecurity
 @Configuration
@@ -48,6 +50,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
         .csrf()
         .disable()
+        .cors()
+        .configurationSource(request -> getCorsConfiguration())
+        .and()
         .sessionManagement()
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
@@ -56,8 +61,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             UsernamePasswordAuthenticationFilter.class);
   }
 
+  private CorsConfiguration getCorsConfiguration() {
+    final var corsConfiguration = new CorsConfiguration().applyPermitDefaultValues();
+    corsConfiguration.addAllowedOrigin("http://localhost:3000");
+    corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE"));
+    return corsConfiguration;
+  }
+
   @Override
-  public void configure(WebSecurity web) throws Exception {
+  public void configure(WebSecurity web) {
     web.ignoring()
         .antMatchers(
             "/v2/api-docs",
